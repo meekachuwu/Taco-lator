@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title>Taco-lator</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<style>
+		* {
+			margin:	0;
+			padding:0;
+			
+			box-sizing: border-box;
+			
+			font-size: calc(64px +  1.5vw);
+		}
+		
+		html, body {
+			width:	100%;
+			height: 100%;
+		}
+		
+		button {
+			margin: 1%;
+			margin-bottom: 10%;
+		}
+		
+		input { width: 25%; }
+		table { margin: auto;}
+		
+		#content	{ text-align: center; }
+		#solution	{ background: lightgrey; }
+		
+		.overline { text-decoration:overline }
+	</style>
+	
+	<script>
+		function solve() {
+			// Varibles
+			A		= inputA.value.split(',');
+			B		= inputB.value.split(',');
+			solution= document.getElementById("solution");
+			
+			// Formula
+			
+			distance = Math.sqrt(
+				((B[0] - A[0]) ** 2)
+				+
+				((B[1] - A[1]) ** 2)
+			)
+			
+			// Response
+			solution.innerHTML = `
+				<table>
+					<tr>
+						<td>D</td>
+						<td>=</td>
+						<td>√<span class="overline">(${B[0]}-${A[0]})² + (${B[1]}-${A[1]})²</span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>=</td>
+						<td>√<span class="overline">(${B[0]-A[0]})² + (${B[1]-A[1]})²</span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>=</td>
+						<td>√<span class="overline">${(B[0]-A[0])**2} + ${(B[1]-A[1])**2}</span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>=</td>
+						<td>√<span class="overline">${(B[0]-A[0])**2 + (B[1]-A[1])**2}</span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>=</td>
+						<td>${distance} units</span></td>
+					</tr>
+				</table>
+			`;
+		}
+	</script>
+</head>
+
+<body>
+	<div id="content">
+		<section>
+			<h1>Input:</h1>
+			Point A: <input id="A" placeholder="x,y"/>
+			<br/>
+			Point B: <input id="B" placeholder="x,y"/>
+		</section>
+
+		<button onclick="solve()">Solve</button>
+		
+		<section>
+			<h1>Solution:</h1>
+			<div id="solution"><br/></div>
+		</section>
+	</div>
+	
+<script>
+	inputA = document.getElementById("A");
+	inputB = document.getElementById("B");
+	
+	inputA.value = '7,2';
+	inputB.value = '4,6';
+	
+	solve()
+</script>
+</body>
+</html>
